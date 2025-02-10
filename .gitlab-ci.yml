@@ -1,0 +1,9 @@
+pages:
+  image: mmoy/riscv-latex-python:2024 # Has LaTeX + riscv + python + ANTLR. See docker/Dockerfile in this repo.
+  variables:
+    ANTLR4: 'java -jar /opt/antlr-4.13.1-complete.jar'
+  script:
+    - make -C MiniC/ doc && rm -fr public/ && mv MiniC/doc/_build/html/ public/
+  artifacts:
+    paths:
+    - public/
