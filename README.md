@@ -61,6 +61,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 
 - :pencil2: 11h30 : TD1, Lexing, Parsing, AST
     - [Énoncé du TD1](https://matthieu-moy.fr/cours/mif08/mif08-td1.pdf)
+    <!-- Solène Richard pas là -->
 
 ## Jeudi 20/2/2025
 
@@ -82,6 +83,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :100: QCM sur TOMUSS, à faire avant mardi 11 mars 2025, 23:59.
 
 - :hammer: 9h45-13h : TP2, Interprétation et Typage (début)
+    <!-- Solène Richard pas là -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://matthieu-moy.fr/cours/mif08/capmif_labs.pdf) -->
     - TP noté sur ANTLR (20 minutes). Sujet pour s'entraîner : [CC2/cc2-sujet-exemple.pdf](CC2/cc2-sujet-exemple.pdf) (squelette et corrigé dans [CC2/](CC2/)).
     - Si besoin : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
@@ -116,11 +118,13 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :100: QCM sur TOMUSS, à faire avant mardi 15 avril 2025, 23:59.
 
 - :pencil2: 9h45-11h15 : TD 3, génération de code
+    <!-- Solène Richard pas là, remplacée par Théo ? -->
     - Contrôle court (ANTLR et RiscV), voir instructions : [QCM.md](QCM.md).
     - Sujet : [TD3 génération de code](https://matthieu-moy.fr/cours/mif08/mif08-td3.pdf)
     <!-- - [Éléments de corrigé, partiel](https://matthieu-moy.fr/cours/mif08/mif08-td3-corrige-partiel.pdf) -->
 
 - :hammer: 11h30-13h : TP 4, génération de code
+    <!-- Solène Richard pas là, remplacée par Théo ? -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://compil-lyon.gitlabpages.inria.fr/mif08-20/capmif_labs.pdf) -->
     - Rappel : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
     - Énoncé : [TP4 génération de code](https://matthieu-moy.fr/cours/mif08/tp4.pdf)
