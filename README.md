@@ -4,8 +4,6 @@ _Année 2024-2025_
 
 * Matthieu Moy, Université Lyon 1, LIP https://matthieu-moy.fr/
 
-## TODO: CETTE PAGE EST EN CHANTIER, NE PAS UTILISER POUR AUTRE CHOSE QUE DES TESTS
-
 ## Communication et nouvelles du cours
 
 * [NEWS.md](NEWS.md) contient les nouvelles du cours (envoyées par email également).
