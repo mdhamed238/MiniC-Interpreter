@@ -11,7 +11,10 @@ expr: expr OP expr
 
 OP : '+'| '*' | '-' | '/' ;
 
-
 INT : '0'..'9'+ ;
 ID : ('a'..'z'|'A'..'Z')+ ;
+
+LPAR: '(';
+RPAR: ')';
+CHARS:  ~[()[\]] -> skip; 
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines

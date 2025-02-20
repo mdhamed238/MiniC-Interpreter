@@ -1,3 +1,7 @@
 *.interp
 *.tokens
 __pycache__
+.antlr
+*Lexer.py
+*Listener.py
+*Parser.py

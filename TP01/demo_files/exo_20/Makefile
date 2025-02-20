@@ -1,5 +1,5 @@
 MAINFILE = main
-PACKAGE = Exo_19
+PACKAGE = Exo_20
 
 ifndef ANTLR4
 $(error variable ANTLR4 is not set)
