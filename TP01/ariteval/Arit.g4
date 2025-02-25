@@ -12,9 +12,10 @@ expr
 	returns[int val]: // MULT is * (matched before PLUS if possible)
 	MINUS e1=expr {$val = -$e1.val}
 	| D_MINUS e1=expr {$val = $e1.val}
+	| PLUS e1=expr {$val = $e1.val}
 	| e1 = expr MULT e2 = expr {$val = $e1.val * $e2.val}
-	| e1 = expr PLUS e2 = expr {$val = $e1.val + $e2.val} // PLUS is +
 	| e1 = expr MINUS e2 = expr {$val = $e1.val - $e2.val}
+	| e1 = expr PLUS e2 = expr {$val = $e1.val + $e2.val} // PLUS is +
 	| a = atom {$val = $a.val}; // just copy the value
 
 atom
@@ -36,3 +37,8 @@ COMMENT: '//' ~[\r\n]* -> skip;
 
 NEWLINE: '\r'? '\n' -> skip;
 WS: (' ' | '\t')+ -> skip;
+
+/*
+ MINUS is left-associative
+ PLUS is right associative
+ */
