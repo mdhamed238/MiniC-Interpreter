@@ -10,7 +10,9 @@ statement:
 
 expr
 	returns[int val]: // MULT is * (matched before PLUS if possible)
-	e1 = expr MULT e2 = expr {$val = $e1.val * $e2.val}
+	MINUS e1=expr {$val = -$e1.val}
+	| D_MINUS e1=expr {$val = $e1.val}
+	| e1 = expr MULT e2 = expr {$val = $e1.val * $e2.val}
 	| e1 = expr PLUS e2 = expr {$val = $e1.val + $e2.val} // PLUS is +
 	| e1 = expr MINUS e2 = expr {$val = $e1.val - $e2.val}
 	| a = atom {$val = $a.val}; // just copy the value
@@ -19,8 +21,6 @@ atom
 	returns[int val]:
 	INT {$val = int($INT.text)} // get the value from the lexer        
 	| '(' expr ')' {$val=$expr.val} // 
-	| D_MINUS expr {$val = abs($expr.val)}
-	| MINUS expr {$val=-$expr.val} 
 	;
 
 SCOL: ';';
