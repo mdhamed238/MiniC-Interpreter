@@ -1,12 +1,11 @@
 grammar Exo_20;
 
-full_expr: ab_saquence EOF;
+full_expr: ab_sequence EOF;
 
-ab_saquence: A B
-        | A ab_saquence B;
+ab_sequence: A ab_sequence B B | /* empty */;
 
 A: 'a';
-B: 'bb';
+B: 'b';
 
 LETTERS: ~[ab] -> skip;
 WS: [ \t\r\n]+ -> skip; // skip spaces, tabs, newlines
