@@ -12,7 +12,7 @@ expr
 	returns[int val]: // MULT is * (matched before PLUS if possible)
 	MINUS e1=expr {$val = -$e1.val}
 	| D_MINUS e1=expr {$val = $e1.val}
-	| PLUS e1=expr {$val = $e1.val}
+	// | PLUS e1=expr {$val = $e1.val}  -> there is no need for unary plus.
 	| e1 = expr MULT e2 = expr {$val = $e1.val * $e2.val}
 	| e1 = expr MINUS e2 = expr {$val = $e1.val - $e2.val}
 	| e1 = expr PLUS e2 = expr {$val = $e1.val + $e2.val} // PLUS is +
