@@ -1,4 +1,4 @@
-# Simplest way: binary installation
+# Simplest, recommended way: binary installation
 
 A pre-compiled archive is available here:
 

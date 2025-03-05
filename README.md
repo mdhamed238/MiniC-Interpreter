@@ -19,6 +19,7 @@ _Année 2024-2025_
 **CM**
 
 Matthieu Moy
+
 **TD**
 - A: Matthieu Moy
 - B: Alec Sadler
@@ -83,7 +84,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :hammer: 9h45-13h : TP2, Interprétation et Typage (début)
     <!-- Solène Richard pas là -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://matthieu-moy.fr/cours/mif08/capmif_labs.pdf) -->
-    - TP noté sur ANTLR (20 minutes). Sujet pour s'entraîner : [CC2/cc2-sujet-exemple.pdf](CC2/cc2-sujet-exemple.pdf) (squelette et corrigé dans [CC2/](CC2/)).
+    - TP noté sur ANTLR (24 minutes). Sujet pour s'entraîner : [CC1/cc1-sujet-exemple.pdf](CC1/cc1-sujet-exemple.pdf) (squelette et corrigé dans [CC1/](CC1/)).
     - Si besoin : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
     - Énoncé : [TP2 Interpreters and Types](https://matthieu-moy.fr/cours/mif08/tp2.pdf)
     - Fichiers du TP2 : [TP02/](TP02/) puis [MiniC/](MiniC/).
