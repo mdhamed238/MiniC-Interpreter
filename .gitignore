@@ -5,3 +5,5 @@ __pycache__
 *Lexer.py
 *Listener.py
 *Parser.py
+*.excalidraw
+*.tgz

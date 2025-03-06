@@ -1,4 +1,4 @@
-MYNAME = Mohamed Ahmed
+MYNAME = Mohamed_Hamed.Mohamed_Ahmed
 MAINFILE = arit
 PACKAGE = Arit
 

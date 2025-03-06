@@ -10,8 +10,8 @@ statement:
 
 expr
 	returns[int val]: // MULT is * (matched before PLUS if possible)
-	MINUS e1=expr {$val = -$e1.val}
-	| D_MINUS e1=expr {$val = $e1.val}
+	D_MINUS e1 = expr {$val = $e1.val}
+	| MINUS e1 = expr {$val = -$e1.val}
 	// | PLUS e1=expr {$val = $e1.val}  -> there is no need for unary plus.
 	| e1 = expr MULT e2 = expr {$val = $e1.val * $e2.val}
 	| e1 = expr MINUS e2 = expr {$val = $e1.val - $e2.val}
@@ -21,13 +21,12 @@ expr
 atom
 	returns[int val]:
 	INT {$val = int($INT.text)} // get the value from the lexer        
-	| '(' expr ')' {$val=$expr.val} // 
-	;
+	| '(' expr ')' {$val=$expr.val} ; // 
 
 SCOL: ';';
 PLUS: '+';
 MINUS: '-';
-D_MINUS: '--'; 
+D_MINUS: '--';
 MULT: '*';
 // We'll deal with division in next lab, not here.
 
@@ -39,6 +38,6 @@ NEWLINE: '\r'? '\n' -> skip;
 WS: (' ' | '\t')+ -> skip;
 
 /*
- MINUS is left-associative
- PLUS is right associative
+ MINUS is left-associative PLUS is right associative
  */
+ 
