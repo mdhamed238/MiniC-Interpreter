@@ -1,4 +1,6 @@
 grammar AnB2n;
+// Rappel : Grammaire combinée lexicographie + syntaxe.
+// Non-terminaux en minuscule, terminaux (lexico) en MAJUSCULE.
 
 // Ne pas modifier le nom 'start' (axiome de la grammaire)
 start: EOF;
