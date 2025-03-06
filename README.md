@@ -19,6 +19,7 @@ _Année 2024-2025_
 **CM**
 
 Matthieu Moy
+
 **TD**
 - A: Matthieu Moy
 - B: Alec Sadler
@@ -55,7 +56,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
     - [vidéo d'introduction au cours](https://www.youtube.com/watch?v=zGifE8MfPWA)
     - [vidéo lexing](https://www.youtube.com/watch?v=UlUTSsOA9Qc)
     - [vidéo parsing](https://www.youtube.com/watch?v=y9MrfDzrAmA)
-    - :100: QCM sur TOMUSS, à faire avant mardi 18/2/2025, 23:59
+    - :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 18/2/2025, 23:59
 
 - :pencil2: 11h30 : TD1, Lexing, Parsing, AST
     - [Énoncé du TD1](https://matthieu-moy.fr/cours/mif08/mif08-td1.pdf)
@@ -78,12 +79,12 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
     - [transparents typage](https://matthieu-moy.fr/cours/mif08/capmif_cours03_typing.pdf)
     - [vidéo typage](https://youtu.be/2A-hQy_6YlE)
     - [vidéo sémantique et interprète](https://youtu.be/8PYhBsgRO6g)
-- :100: QCM sur TOMUSS, à faire avant mardi 11 mars 2025, 23:59.
+- :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 11 mars 2025, 23:59.
 
 - :hammer: 9h45-13h : TP2, Interprétation et Typage (début)
     <!-- Solène Richard pas là -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://matthieu-moy.fr/cours/mif08/capmif_labs.pdf) -->
-    - TP noté sur ANTLR (20 minutes). Sujet pour s'entraîner : [CC2/cc2-sujet-exemple.pdf](CC2/cc2-sujet-exemple.pdf) (squelette et corrigé dans [CC2/](CC2/)).
+    - :100: TP noté sur ANTLR (24 minutes). Sujet pour s'entraîner : [CC1/cc1-sujet-exemple.pdf](CC1/cc1-sujet-exemple.pdf) (squelette et corrigé dans [CC1/](CC1/)).
     - Si besoin : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
     - Énoncé : [TP2 Interpreters and Types](https://matthieu-moy.fr/cours/mif08/tp2.pdf)
     - Fichiers du TP2 : [TP02/](TP02/) puis [MiniC/](MiniC/).
@@ -95,7 +96,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
     - [transparents RiscV](https://matthieu-moy.fr/cours/mif08/capmif_cours04_riscv.pdf)
     - [vidéo sur RISCV](https://youtu.be/ZdElX9e_tAI)
     - Extrait de la documentation RISCV: [riscv_isa.pdf](https://matthieu-moy.fr/cours/mif08/riscv_isa.pdf)
-- :100: QCM sur TOMUSS, à faire avant lundi 7 avril 2025, 23:59.
+- :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant lundi 7 avril 2025, 23:59.
 
 - :pencil2: 9h45 : TD2: Typing, Architecture RiscV
     - Rappel, extrait de la documentation RISCV : [riscv_isa.pdf](https://matthieu-moy.fr/cours/mif08/riscv_isa.pdf)
@@ -113,11 +114,11 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :book: 8h-9h30 : Cours 4, génération de code
     - génération de code 3 adresses + allocation naïve, [transparents](https://matthieu-moy.fr/cours/mif08/capmif_cours05_3ad_codegen.pdf), [vidéo](https://youtu.be/m2x7leFnCN4)
     - Représentations intermédiaires, [transparents](https://matthieu-moy.fr/cours/mif08/capmif_cours06_irs.pdf), [vidéo 6a](https://youtu.be/dD9bRhLfykM), [vidéo 6b](https://youtu.be/Xico_JTK3XQ).
-- :100: QCM sur TOMUSS, à faire avant mardi 15 avril 2025, 23:59.
+- :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 15 avril 2025, 23:59.
 
 - :pencil2: 9h45-11h15 : TD 3, génération de code
     <!-- Solène Richard pas là, remplacée par Théo ? -->
-    - Contrôle court (ANTLR et RiscV), voir instructions : [QCM.md](QCM.md).
+    - :100: Contrôle court (ANTLR et RiscV), voir instructions : [QCM.md](QCM.md).
     - Sujet : [TD3 génération de code](https://matthieu-moy.fr/cours/mif08/mif08-td3.pdf)
     <!-- - [Éléments de corrigé, partiel](https://matthieu-moy.fr/cours/mif08/mif08-td3-corrige-partiel.pdf) -->
 
@@ -140,7 +141,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 
 - :book: 8h-9h30 : Cours 5, allocation de registres
     - Register allocation + data-flow analyses : [transparents](https://matthieu-moy.fr/cours/mif08/capmif_cours07_regalloc.pdf), [vidéo première partie](https://youtu.be/9902mMgDIK8), [vidéo deuxième partie](https://youtu.be/LknSDccweFw).
-    - :100: QCM sur TOMUSS, à faire avant lundi 2 juin 2025, 23:59.
+    - :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant lundi 2 juin 2025, 23:59.
 
 
 - :hammer: 9h45-13h : TP5, nouvelles fonctionnalités de langage
@@ -155,12 +156,12 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 
 
 - :pencil2: 11h30-13h : TD5, allocation de registres intelligente
-    - Contrôle court (Typage), voir instructions : [QCM.md](QCM.md).
+    - :100: Contrôle court (Typage), voir instructions : [QCM.md](QCM.md).
     - Énoncé : [TD5 regalloc](https://matthieu-moy.fr/cours/mif08/mif08-td5.pdf)
 
 ## Jeudi 12/06/2025
 
-- :100: Examen.
+- :negative_squared_cross_mark: Examen.
 
 ## Pondération des notes (indicative pour l'instant sauf l'examen final qui sera forcément 40%)
   - QCM : non pris en compte dans la moyenne d'UE
