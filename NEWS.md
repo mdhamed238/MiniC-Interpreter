@@ -3,7 +3,20 @@
 
 Les nouvelles du cours apparaîtront ici au fur et à mesure.
 
-## 5/03/2025: Contrôle continu le 13 mars
+## 10/03/2025 : corrigé du TD1 en ligne
+
+Je ne distribue normalement pas les corrigés des TDs, mais le TD1 étant assez
+dense, et pour vous permettre de vous préparer au mieux au CC de jeudi, je viens
+de publier un corrigé ici :
+
+  https://matthieu-moy.fr/cours/mif08/mif08-td1-solutions.pdf
+
+Notez que pour beaucoup d'exercices les énoncés sont un peu vagues pour laisser
+la place à la discussion en TD. Pour le CC noté ce jeudi, l'énoncé sera aussi
+précis que possible et pourra avoir des définitions différentes de celles du TD.
+Au risque d'enfoncer une porte ouverte : lisez en détails l'énoncé !
+
+## 5/03/2025 : Contrôle continu le 13 mars
 
 Nous ferons le premier contrôle continu ce jeudi 13 mars en début de TP (pour
 rappel, tout est indiqué dans le fichier README.md à la racine du Git). Il
