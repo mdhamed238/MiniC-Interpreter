@@ -180,8 +180,8 @@ def main(inputname, reg_alloc, mode,
                 allocator = AllInMemAllocator(fdata)
                 comment = "all-in-memory allocation"
             elif reg_alloc == "hybrid":
-                from CodeGen.HybridNaiveAllocator import (
-                        HybridNaiveAllocator  # type: ignore[import]
+                from CodeGen.HybridNaiveAllocator import (  # type: ignore[import]
+                        HybridNaiveAllocator
                 )
                 allocator = HybridNaiveAllocator(fdata)
                 comment = "hybrid, naive allocation"
@@ -198,8 +198,8 @@ def main(inputname, reg_alloc, mode,
 liveness file not found for {}.".format(form))
                 else:
                     try:
-                        from RegAlloc.LivenessDataFlow import (
-                                LivenessDataFlow  # type: ignore[import]
+                        from RegAlloc.LivenessDataFlow import (  # type: ignore[import]
+                                LivenessDataFlow
                         )
                         liveness = LivenessDataFlow(code, debug=debug)
                     except NameError:
