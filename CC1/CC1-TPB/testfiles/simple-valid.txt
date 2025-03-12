@@ -1,0 +1,3 @@
+const toto = 42;
+// EXPECTED
+// ok
