@@ -1,6 +1,6 @@
 MAINFILE = main
 PACKAGE = SujetA
-MYNAME = JohnDoe
+MYNAME = Mohamed_Hamed.Mohamed_Ahmed
 
 ifndef ANTLR4
 $(error variable ANTLR4 is not set)

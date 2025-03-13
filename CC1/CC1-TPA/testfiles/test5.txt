@@ -1,0 +1,4 @@
+this_is_not_valid_syntax
+// EXPECTED
+// syntax error
+// EXITCODE 2
