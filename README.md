@@ -60,6 +60,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 
 - :pencil2: 11h30 : TD1, Lexing, Parsing, AST
     - [Énoncé du TD1](https://matthieu-moy.fr/cours/mif08/mif08-td1.pdf)
+    - [Éléments de corrigés](https://matthieu-moy.fr/cours/mif08/mif08-td1-solutions.pdf)
     <!-- Solène Richard pas là -->
 
 ## Jeudi 20/2/2025
@@ -79,7 +80,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
     - [transparents typage](https://matthieu-moy.fr/cours/mif08/capmif_cours03_typing.pdf)
     - [vidéo typage](https://youtu.be/2A-hQy_6YlE)
     - [vidéo sémantique et interprète](https://youtu.be/8PYhBsgRO6g)
-- :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 11 mars 2025, 23:59.
+- :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 18 mars 2025, 23:59.
 
 - :hammer: 9h45-13h : TP2, Interprétation et Typage (début)
     <!-- Solène Richard pas là -->
@@ -161,7 +162,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 
 ## Jeudi 12/06/2025
 
-- :negative_squared_cross_mark: Examen.
+- :100: Examen.
 
 ## Pondération des notes (indicative pour l'instant sauf l'examen final qui sera forcément 40%)
   - QCM : non pris en compte dans la moyenne d'UE
