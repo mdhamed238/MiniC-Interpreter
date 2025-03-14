@@ -1,4 +1,4 @@
-let _not_valid = 2011;
+let _year = 2011;
 // EXPECTED
 // lexical error
 // EXITCODE 1
