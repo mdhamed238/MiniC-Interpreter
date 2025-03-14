@@ -18,3 +18,4 @@ log-*.txt
 .eval-done.txt
 *.py.diff
 *.g4.diff
+.vscode
