@@ -3,6 +3,36 @@
 
 Les nouvelles du cours apparaîtront ici au fur et à mesure.
 
+## 13/03/2025 : nouvelles du cours
+
+Plusieurs informations :
+
+* Les notes de TP1 et CC1 sont en ligne. Dans les deux cas, passez votre souris
+  sur la note pour voir le détail du barème. Je me permets d'insister sur
+  quelques points :
+  - La correction de ce CC ainsi que des autres TPs est automatisée. Une «
+    petite » erreur comme une erreur de syntaxe dans votre code a pour
+    conséquence que votre code ne fonctionne pas, ce qui a des conséquences
+    dramatiques sur la note. Si vous trouvez cela sévère, imaginez que vous
+    mettez votre code en production et demandez-vous si ce serait grave d'avoir
+    une erreur de syntaxe dedans ... Ces erreurs sont triviales à éviter, soyez
+    méthodiques pour ne pas perdre de points bêtement.
+  - Je vous donne des consignes et des Makefile qui fonctionnent. Ne modifiez
+    pas les Makefiles, si vous le faites vous avez de bonnes chances d'avoir du
+    code qui ne fonctionne pas chez moi, avec la même conséquence dramatique.
+
+* Je rappelle que j'applique la « règle du max » pour les CC (mais pas pour les
+  TP à terminer en temps libre) : la note prise en compte est à chaque fois le
+  max entre la note de CC et la note de contrôle terminal. Ce n'est pas une
+  raison pour ne pas travailler les CC, mais ne vous démoralisez pas si vous
+  avez eu une mauvaise note en CC, tout est rattrapable.
+
+* La plateforme OpenStack qui héberge nos VM sera éteinte ce vendredi soir et
+  probablement HS tout le week-end.
+
+* Je vous rappelle que vous avez un QCM sur le CM1 à remplir pour la semaine
+  prochaine.
+
 ## 10/03/2025 : corrigé du TD1 en ligne
 
 Je ne distribue normalement pas les corrigés des TDs, mais le TD1 étant assez
