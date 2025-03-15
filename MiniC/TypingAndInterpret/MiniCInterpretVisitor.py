@@ -176,12 +176,16 @@ class MiniCInterpretVisitor(MiniCVisitor):
         name = ctx.ID().getText()
         new_value = self.visit(ctx.expr())
         old_value = self._memory[name]
-        if isinstance(old_value, int):
-            self._memory[name] = int(new_value)
+        
+        if isinstance(old_value, bool):
+            self._memory[name] = bool(new_value)
         elif isinstance(old_value, float):
             self._memory[name] = float(new_value)
+        elif isinstance(old_value, int):
+            self._memory[name] = int(new_value)
         else: 
             self._memory[name] = new_value
+        # print(f"{name} <-- {self._memory[name]} was {old_value}")
 
 
     def visitIfStat(self, ctx) -> None:

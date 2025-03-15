@@ -20,6 +20,7 @@ class MyAritVisitor(AritVisitor):
             return float(ctx.getText())
 
     def visitIdAtom(self, ctx):
+        print('Atom: ', ctx.getText())
         try:
             return self._memory[ctx.getText()]
         except KeyError:
@@ -30,6 +31,8 @@ class MyAritVisitor(AritVisitor):
         # appropriate method (visitSomething) automatically.
         leftval = self.visit(ctx.expr(0))
         rightval = self.visit(ctx.expr(1))
+        print("-MULT- Left eval", leftval)
+        print("-MULT- Right eval", rightval)
         # an elegant way to match the token:
         if ctx.multop.type == AritParser.MULT:
             return leftval * rightval
@@ -39,6 +42,8 @@ class MyAritVisitor(AritVisitor):
     def visitAdditiveExpr(self, ctx):
         leftval = self.visit(ctx.expr(0))
         rightval = self.visit(ctx.expr(1))
+        print("-PLUS- Left eval", leftval)
+        print("-PLUS- Right eval", rightval)
         if ctx.addop.type == AritParser.PLUS:
             return leftval + rightval
         else:
