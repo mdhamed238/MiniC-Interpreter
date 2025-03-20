@@ -3,6 +3,40 @@
 
 Les nouvelles du cours apparaîtront ici au fur et à mesure.
 
+## 20/03/2025 : à propos de couverture, QCM, deadlines
+
+Vos TP notés seront évalués essentiellement sur deux critères :
+
+* La correction du code (Python, ANTLR) que vous avez écrit, mesurée par le
+  nombre d'échecs de votre compilateur dans la base de tests enseignant.
+
+* La qualité de votre base de tests (i.e. les fichiers .c), mesurée par la
+  couverture de votre base de tests sur le compilateur enseignant. Vous pouvez
+  maximiser la couverture de votre base de tests sur votre compilateur. Pour
+  chaque TP, vous devriez avoir 100% de couverture sur la partie du code Python
+  concernée (MiniCInterpretVisitor.py pour le TP d'interprétation, etc.). Vous
+  voyez le pourcentage de couverture à la fin de l'exécution de la base de
+  tests, mais beaucoup d'entre vous n'ont pas lu jusqu'au bout, en particulier
+  la phrase « Coverage HTML written to dir htmlcov » qui vous invite à regarder
+  le rapport de couverture détaillé (en couleurs et tout !) dans le répertoire
+  htmlcov/.
+
+Certaines lignes sont volontairement ignorées dans le rapport de couverture, en
+particulier les lignes contenant `MiniCInternalError` (cf. ), qui par définition ne
+peuvent pas être couvertes. Il y avait un petit bug de mon squelette et une
+ligne était forcément non-couverte mais pas ignorée, un « git pull » vous
+apportera la correction.
+
+J'en profite pour vous rappeler les prochaines deadlines :
+
+* J'ai rouvert le QCM2, je laisse aux retardataires jusqu'à ce lundi soir pour y
+  répondre.
+
+* TP2 : dimanche 6 avril 2025, 23h59. (deadline stricte) (il était déjà fortement
+  recommandé de l'avoir terminé pour aujourd'hui)
+
+* QCM3 : lundi 7 avril 2025, 23:59.
+
 ## 13/03/2025 : nouvelles du cours
 
 Plusieurs informations :
