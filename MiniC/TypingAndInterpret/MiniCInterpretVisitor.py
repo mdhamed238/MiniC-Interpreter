@@ -120,8 +120,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
             case MiniCParser.MOD:
                 # TODO : interpret modulo
                 raise NotImplementedError()
-            case _:
-                raise MiniCInternalError(
+            case _: raise MiniCInternalError(
                     f"Unknown multiplicative operator '{ctx.myop}'")
 
     def visitNotExpr(self, ctx) -> bool:
