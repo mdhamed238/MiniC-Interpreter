@@ -21,18 +21,19 @@ _Année 2024-2025_
 Matthieu Moy
 
 **TD**
-- A: Matthieu Moy
-- B: Alec Sadler
-- C: Mathieu Lefort
-- D: Nicolas Louvet
-- E: Solène Richard
+- A: [Matthieu Moy](https://matthieu-moy.fr/)
+- B: [Alec Sadler](https://www.linkedin.com/in/alec-sadler-6676951b9/?originalSubdomain=fr)
+- C: [Mathieu Lefort](https://perso.liris.cnrs.fr/mathieu.lefort/)
+- D: [Nicolas Louvet](https://perso.ens-lyon.fr/nicolas.louvet/)
+- E: [Théo Pierron](https://perso.liris.cnrs.fr/tpierron/)
 
 **TP**
-- A: Matthieu Moy, Thomas Stavis
-- B: Alec Sadler
-- C: Mathieu Lefort
-- D: Nicolas Louvet
-- E: Thibaut Modrzyk, Solène Richard
+- A: [Thomas Stavis](https://perso.ens-lyon.fr/thomas.stavis/)
+- B: [Alec Sadler](https://www.linkedin.com/in/alec-sadler-6676951b9/?originalSubdomain=fr)
+- C: [Mathieu Lefort](https://perso.liris.cnrs.fr/mathieu.lefort/)
+- D: [Nicolas Louvet](https://perso.ens-lyon.fr/nicolas.louvet/)
+- E: [Thibaut Modrzyk](https://tmodrzyk.github.io/)
+- [Matthieu Moy](https://matthieu-moy.fr/) circule entre les salles
 
 ## Vidéos des CM
 
@@ -61,7 +62,6 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :pencil2: 11h30 : TD1, Lexing, Parsing, AST
     - [Énoncé du TD1](https://matthieu-moy.fr/cours/mif08/mif08-td1.pdf)
     - [Éléments de corrigés](https://matthieu-moy.fr/cours/mif08/mif08-td1-solutions.pdf)
-    <!-- Solène Richard pas là -->
 
 ## Jeudi 20/2/2025
 
@@ -83,7 +83,6 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 18 mars 2025, 23:59.
 
 - :hammer: 9h45-13h : TP2, Interprétation et Typage (début)
-    <!-- Solène Richard pas là -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://matthieu-moy.fr/cours/mif08/capmif_labs.pdf) -->
     - :100: TP noté sur ANTLR (24 minutes). Sujet pour s'entraîner : [CC1/cc1-sujet-exemple.pdf](CC1/cc1-sujet-exemple.pdf) (squelette et corrigé dans [CC1/](CC1/)).
     - Si besoin : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
@@ -118,13 +117,12 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 - :negative_squared_cross_mark: QCM sur TOMUSS, à faire avant mardi 15 avril 2025, 23:59.
 
 - :pencil2: 9h45-11h15 : TD 3, génération de code
-    <!-- Solène Richard pas là, remplacée par Théo ? -->
+    <!-- Théo -->
     - :100: Contrôle court (ANTLR et RiscV), voir instructions : [QCM.md](QCM.md).
     - Sujet : [TD3 génération de code](https://matthieu-moy.fr/cours/mif08/mif08-td3.pdf)
     <!-- - [Éléments de corrigé, partiel](https://matthieu-moy.fr/cours/mif08/mif08-td3-corrige-partiel.pdf) -->
 
 - :hammer: 11h30-13h : TP 4, génération de code
-    <!-- Solène Richard pas là, remplacée par Théo ? -->
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://compil-lyon.gitlabpages.inria.fr/mif08-20/capmif_labs.pdf) -->
     - Rappel : des VM pour vous dépanner en cas de problème sur machine perso : [VM.md](VM.md)
     - Énoncé : [TP4 génération de code](https://matthieu-moy.fr/cours/mif08/tp4.pdf)
