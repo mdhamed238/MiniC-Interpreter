@@ -22,7 +22,6 @@ class MiniCInterpretVisitor(MiniCVisitor):
     def visitVarDecl(self, ctx) -> None:
         # Initialise all variables in self._memory
         type_str = ctx.typee().getText()
-        # var_name = ctx.id_l().getText()
         var_list = self.visit(ctx.id_l())
         
         for var_name in var_list:
@@ -136,9 +135,12 @@ class MiniCInterpretVisitor(MiniCVisitor):
             case MiniCParser.MULT:
                 return lval * rval
             case MiniCParser.DIV:
+                if rval == 0:
+                    raise MiniCRuntimeError("Division by 0")
                 return lval / rval;
             case MiniCParser.MOD:
-                return lval % rval
+                q = int(lval / rval)
+                return lval - q * rval
             case _:
                 raise MiniCInternalError(
                     f"Unknown multiplicative operator '{ctx.myop}'")
@@ -189,10 +191,11 @@ class MiniCInterpretVisitor(MiniCVisitor):
 
 
     def visitIfStat(self, ctx) -> None:
-        if(self.visit(ctx.expr())):
+        if self.visit(ctx.expr()):
             self.visit(ctx.then_block)
         else:
-            self.visit(ctx.else_block)
+            if ctx.else_block:
+                self.visit(ctx.else_block)
 
     def visitWhileStat(self, ctx) -> None:
         while(self.visit(ctx.expr())):
