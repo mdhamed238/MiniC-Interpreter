@@ -1,7 +1,7 @@
 #include "printlib.h"
 
 int main() {
-    float x;
+    int x;
     x = 9;
 
     if(x > 10) {

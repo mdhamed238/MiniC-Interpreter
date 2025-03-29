@@ -21,9 +21,9 @@ int main() {
     }
 
     if (a > 10 && c == 0) {
-        printf("This condition should be false\n");
+        println_string("This condition should be false");
     } else {
-        printf("Condition with AND and false comparison is false\n");
+        println_string("Condition with AND and false comparison is false");
     }
 
     return 0;

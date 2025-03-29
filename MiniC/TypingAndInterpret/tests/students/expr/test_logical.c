@@ -22,6 +22,5 @@ int main()
 }
 
 
-// SKIP TEST EXPECTED
 // EXPECTED
 // b is True

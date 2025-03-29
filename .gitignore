@@ -9,3 +9,6 @@ __pycache__
 *.tgz
 
 TD1
+run_tests.sh
+*.s
+*.riscv
