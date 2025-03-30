@@ -4,7 +4,7 @@ MIF08 / CAP / CS444 2024-25
 
 # Authors
 
-TODO: YOUR NAME HERE
+Mohamed Hamed MOHAMED AHMED
 
 # Howto
 
@@ -15,14 +15,15 @@ TODO: YOUR NAME HERE
 You can select the files you want to test by using `make test FILTER='TypingAndInterpret/**/*bad*.c'` (`**` means
 "any number of possibly nested directories").
 
-# Test design 
+# Test design
 
-TODO: explain your tests. Do not repeat what test files already contain, just give the main objectives of the tests.
+The main objective was to cover as many test cases as possible to make sure that the interpreter is working as expected.
 
 # Design choices
 
-TODO: explain your choices - explain the limitations of your implementation.
+I attentively followed the instructions of the Labwork and i was able to quickly understand what must be done and how it should be.
+My implementation is an abstract representation of the ANTLR grammar for MiniC language. Hence, there is no known limitations since i the test coverage is 97% and all read like a novel.
 
 # Known bugs
 
-TODO: document any known bug and limitations. Did you do everything asked for? Did you implement an extension?
+There are no limitations or bugs by the time you are reading this document. Any suggestions are highly welcome :D

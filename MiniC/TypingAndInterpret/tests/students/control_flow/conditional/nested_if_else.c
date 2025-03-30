@@ -19,6 +19,5 @@ int main(){
 }
 
 
-// SKIP TEST EXPECTED
 // EXPECTED
 // X is between 5 and 15

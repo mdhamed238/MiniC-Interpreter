@@ -4,7 +4,7 @@ from typing import (
   List)
 from MiniCVisitor import MiniCVisitor
 from MiniCParser import MiniCParser
-from Lib.Errors import MiniCRuntimeError, MiniCInternalError, MiniCUnsupportedError
+from Lib.Errors import MiniCRuntimeError, MiniCInternalError, MiniCTypeError, MiniCUnsupportedError
 
 MINIC_VALUE = int | str | bool | float | List['MINIC_VALUE']
 
@@ -35,7 +35,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
                 case 'string':
                     self._memory[var_name] = ""
                 case _:
-                    raise NotImplementedError(f"Initialization for type {type_str}")
+                    raise MiniCTypeError(f"Unsupported initialization for type {type_str}")
 
         
     def visitIdList(self, ctx) -> List[str]:

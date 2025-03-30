@@ -17,7 +17,7 @@ int main() {
     if (a > b || b >= c) {
         println_string("a is greater than b or b is greater than or equal to c");
     } else {
-        println_string("a is not greater than b or b is not greater than or equal to c");
+        println_string("a is not greater than b and b is not greater than or equal to c");
     }
 
     // More complex condition using AND (&&)
@@ -34,12 +34,11 @@ int main() {
         println_string("None of the OR conditions are satisfied");
     }
 
-
     return 0;
 }
 
 // EXPECTED
 // a is less than b and b is greater than c
-// a is not greater than b or b is not greater than or equal to c
+// a is greater than b or b is greater than or equal to c
 // a is less than b, b is greater than c, and c is less than or equal to a
 // Either a is greater than b, b is less than or equal to c, or a is greater than or equal to c

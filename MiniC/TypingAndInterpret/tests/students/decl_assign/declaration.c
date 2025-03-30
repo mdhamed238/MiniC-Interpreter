@@ -6,7 +6,6 @@ int main() {
     bool b;
     string s;
     
-    // Default initialization values
     println_int(x);
     println_float(y);
     println_bool(b);
@@ -14,7 +13,6 @@ int main() {
     
     return 0;
 }
-
 
 // SKIP TEST EXPECTED
 // EXPECTED

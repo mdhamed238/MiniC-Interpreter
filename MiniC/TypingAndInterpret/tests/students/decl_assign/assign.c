@@ -20,7 +20,6 @@ int main() {
 }
 
 
-// SKIP TEST EXPECTED
 // EXPECTED
 // 42
 // 3.14
