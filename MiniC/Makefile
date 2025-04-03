@@ -1,4 +1,4 @@
-MYNAME = JohnDoe
+MYNAME = Mohamed_Hamed.Mohamed_Ahmed
 PACKAGE = MiniC
 # Example: stop at the first failed test:
 #   make PYTEST_OPTS=-x test

@@ -8,7 +8,7 @@ int main()
 
     result = str1 + str2;
 
-    println_string(result); // Expected output: "Hello, World!"
+    println_string(result);
 
     return 0;
 }

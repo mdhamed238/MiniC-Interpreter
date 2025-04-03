@@ -34,8 +34,6 @@ class MiniCInterpretVisitor(MiniCVisitor):
                     self._memory[var_name] = False
                 case 'string':
                     self._memory[var_name] = ""
-                case _:
-                    raise MiniCTypeError(f"Unsupported initialization for type {type_str}")
 
         
     def visitIdList(self, ctx) -> List[str]:
@@ -139,6 +137,8 @@ class MiniCInterpretVisitor(MiniCVisitor):
                     raise MiniCRuntimeError("Division by 0")
                 return lval / rval;
             case MiniCParser.MOD:
+                if rval == 0:
+                    raise MiniCRuntimeError("Division by 0")
                 q = int(lval / rval)
                 return lval - q * rval
             case _:
