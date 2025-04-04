@@ -22,7 +22,7 @@ The main objective was to cover as many test cases as possible to make sure that
 # Design choices
 
 I attentively followed the instructions of the Labwork and i was able to quickly understand what must be done and how it should be.
-My implementation is an abstract representation of the ANTLR grammar for MiniC language. Thus, there is no known limitations since the test coverage is 97% with 100% success.
+My implementation is an abstract representation of the ANTLR grammar for MiniC language. Thus, there is no known limitations since the test coverage is 100% with 100% success.
 
 # Known bugs
 

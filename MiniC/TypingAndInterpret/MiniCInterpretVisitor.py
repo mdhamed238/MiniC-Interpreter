@@ -60,10 +60,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
         return ctx.getText() == "true"
 
     def visitIdAtom(self, ctx) -> MINIC_VALUE:
-        try:
-            return self._memory[ctx.getText()]
-        except KeyError:
-            raise MiniCUnsupportedError(f"Uknown identifier: {ctx.getText()}")
+        return self._memory[ctx.getText()]
 
     def visitStringAtom(self, ctx) -> str:
         return ctx.getText()[1:-1]  # Remove the ""
@@ -125,10 +122,12 @@ class MiniCInterpretVisitor(MiniCVisitor):
             raise MiniCInternalError(
                 f"Unknown additive operator '{ctx.myop}'")
 
-    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE:
+
+    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE: # type: ignore
         assert ctx.myop is not None
         lval = self.visit(ctx.expr(0))
         rval = self.visit(ctx.expr(1))
+        
         match ctx.myop.type:
             case MiniCParser.MULT:
                 return lval * rval
@@ -141,9 +140,6 @@ class MiniCInterpretVisitor(MiniCVisitor):
                     raise MiniCRuntimeError("Division by 0")
                 q = int(lval / rval)
                 return lval - q * rval
-            case _:
-                raise MiniCInternalError(
-                    f"Unknown multiplicative operator '{ctx.myop}'")
 
     def visitNotExpr(self, ctx) -> bool:
         return not self.visit(ctx.expr())
