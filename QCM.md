@@ -36,8 +36,9 @@ Seul document autorisé (et quasi-indispensable, pensez-y) : la documentation
 RiscV
 [riscv_isa.pdf](https://matthieu-moy.fr/cours/mif08/riscv_isa.pdf).
 
-Au programme : RiscV (jeu d'instruction, assemblage, désassemblage), analyse
-lexicale et syntaxique, ANTLR. Python n'est pas au programme.
+Au programme : RiscV (jeu d'instruction, assemblage, désassemblage, que vous
+devez être capables de faire à la main), analyse lexicale et syntaxique, ANTLR.
+Python n'est pas au programme.
 
 ## CC du 5 juin 2025
 
