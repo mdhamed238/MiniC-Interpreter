@@ -151,11 +151,11 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
 ## Jeudi 5/6/2025
 
 - :pencil2: 9h45-11h15 : TD4, analyse de vivacité
+    - :100: Contrôle court (Typage), voir instructions : [QCM.md](QCM.md).
     - Énoncé : [TD4 liveness](https://matthieu-moy.fr/cours/mif08/mif08-td4.pdf)
 
 
 - :pencil2: 11h30-13h : TD5, allocation de registres intelligente
-    - :100: Contrôle court (Typage), voir instructions : [QCM.md](QCM.md).
     - Énoncé : [TD5 regalloc](https://matthieu-moy.fr/cours/mif08/mif08-td5.pdf)
 
 ## Jeudi 12/06/2025

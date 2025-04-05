@@ -28,18 +28,19 @@ Prévoyez un stylo noir ou bleu foncé, et un blanc correcteur.
 
 La note prise en compte dans la moyenne est le maximum entre la note de chaque contrôle et la note de contrôle terminal. Les absences, justifiées ou non, entraînent la note 0/20 (donc la note sera remplacée par la note de contrôle terminal).
 
-## QCM du 22 février 2024
+## QCM du 10 avril 2025
 
 Le QCM aura lieu en début de TD.
 
 Seul document autorisé (et quasi-indispensable, pensez-y) : la documentation
 RiscV
-[riscv_isa.pdf](https://compil-lyon.gitlabpages.inria.fr/mif08-files-2024/riscv_isa.pdf).
+[riscv_isa.pdf](https://matthieu-moy.fr/cours/mif08/riscv_isa.pdf).
 
-Au programme : RiscV (jeu d'instruction, assemblage, désassemblage), analyse
-lexicale et syntaxique, ANTLR. Python n'est pas au programme.
+Au programme : RiscV (jeu d'instruction, assemblage, désassemblage, que vous
+devez être capables de faire à la main), analyse lexicale et syntaxique, ANTLR.
+Python n'est pas au programme.
 
-## CC du 6 juin 2024
+## CC du 5 juin 2025
 
 Le CC aura lieu à 9h45, il dure 20 minutes (+ tiers-temps éventuel). Aucun
 document autorisé. Les retardataires auront moins de temps pour composer.
