@@ -123,7 +123,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
                 f"Unknown additive operator '{ctx.myop}'")
 
 
-    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE: # type: ignore
+    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE: 
         assert ctx.myop is not None
         lval = self.visit(ctx.expr(0))
         rval = self.visit(ctx.expr(1))
@@ -140,6 +140,8 @@ class MiniCInterpretVisitor(MiniCVisitor):
                     raise MiniCRuntimeError("Division by 0")
                 q = int(lval / rval)
                 return lval - q * rval
+            
+            case _: raise MiniCInternalError(f"Unknown multiplicative operator '{ctx.myop}'")
 
     def visitNotExpr(self, ctx) -> bool:
         return not self.visit(ctx.expr())
