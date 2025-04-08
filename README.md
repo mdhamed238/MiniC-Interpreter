@@ -21,11 +21,11 @@ _Année 2024-2025_
 Matthieu Moy
 
 **TD**
-- A: [Matthieu Moy](https://matthieu-moy.fr/)
-- B: [Alec Sadler](https://www.linkedin.com/in/alec-sadler-6676951b9/?originalSubdomain=fr)
-- C: [Mathieu Lefort](https://perso.liris.cnrs.fr/mathieu.lefort/)
-- D: [Nicolas Louvet](https://perso.ens-lyon.fr/nicolas.louvet/)
-- E: [Théo Pierron](https://perso.liris.cnrs.fr/tpierron/)
+- A (29 étudiant): [Matthieu Moy](https://matthieu-moy.fr/)
+- B (31 étudiant): [Alec Sadler](https://www.linkedin.com/in/alec-sadler-6676951b9/?originalSubdomain=fr)
+- C (33 étudiant): [Mathieu Lefort](https://perso.liris.cnrs.fr/mathieu.lefort/)
+- D (30 étudiant): [Nicolas Louvet](https://perso.ens-lyon.fr/nicolas.louvet/)
+- E (25 étudiant): [Théo Pierron](https://perso.liris.cnrs.fr/tpierron/)
 
 **TP**
 - A: [Thomas Stavis](https://perso.ens-lyon.fr/thomas.stavis/)
