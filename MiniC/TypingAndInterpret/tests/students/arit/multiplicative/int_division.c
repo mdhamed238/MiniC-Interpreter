@@ -2,17 +2,16 @@
 
 int main()
 {
-  int x, y;
-
-  x = 112 / 16;
-  println_int(x);
-
-  y = 12/25;
-  println_int(y);
+  println_int(4/3);
+  println_int(-4/3);
+  println_int(4/-3);
+  println_int(-4/-3);
 
   return 0;
 }
 
 // EXPECTED
-// 7
-// 0
+// 1
+// -1
+// -1
+// 1

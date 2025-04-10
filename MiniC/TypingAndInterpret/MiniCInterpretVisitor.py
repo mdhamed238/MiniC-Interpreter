@@ -134,7 +134,11 @@ class MiniCInterpretVisitor(MiniCVisitor):
             case MiniCParser.DIV:
                 if rval == 0:
                     raise MiniCRuntimeError("Division by 0")
-                return lval / rval;
+                
+                if isinstance(lval, int) and isinstance(rval, int):
+                    return int(lval / rval)
+                
+                return lval / rval
             case MiniCParser.MOD:
                 if rval == 0:
                     raise MiniCRuntimeError("Division by 0")
