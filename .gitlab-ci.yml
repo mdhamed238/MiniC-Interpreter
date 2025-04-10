@@ -3,6 +3,8 @@ pages:
   variables:
     ANTLR4: 'java -jar /opt/antlr-4.13.1-complete.jar'
   rules:
+    - exists:
+      - MiniC/Makefile
   script:
     - ls
     - make -C MiniC/ doc && rm -fr public/ && mv MiniC/doc/_build/html/ public/
