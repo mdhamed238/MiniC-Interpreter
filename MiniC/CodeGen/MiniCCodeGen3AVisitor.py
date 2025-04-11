@@ -1,4 +1,5 @@
 from typing import List
+
 from MiniCVisitor import MiniCVisitor
 from MiniCParser import MiniCParser
 from Lib.LinearCode import LinearCode
@@ -74,9 +75,15 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         raise MiniCUnsupportedError("float literal")
 
     def visitBooleanAtom(self, ctx) -> Operands.Temporary:
-        # true is 1 false is 0
-        raise NotImplementedError()  # TODO
-
+        dest_temp = self._current_function.fdata.fresh_tmp()
+        print(ctx.getText())
+        if ctx.getText() == "true":
+            self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(1)))
+        else:   
+            self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(0)))
+        return dest_temp
+            
+            
     def visitIdAtom(self, ctx) -> Operands.Temporary:
         try:
             # get the temporary associated to id
@@ -99,13 +106,34 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         assert ctx.myop is not None
         tmpl: Operands.Temporary = self.visit(ctx.expr(0))
         tmpr: Operands.Temporary = self.visit(ctx.expr(1))
-        raise NotImplementedError()  # TODO
-
+        
+        res = self._current_function.fdata.fresh_tmp()
+        
+        if ctx.myop.type == MiniCParser.PLUS:
+            self._current_function.add_instruction(RiscV.add(res, tmpl, tmpr))
+        elif ctx.myop.type == MiniCParser.MINUS:
+            self._current_function.add_instruction(RiscV.sub(res, tmpl, tmpr))
+        else:
+            raise MiniCInternalError(
+                f"Unknown additive operator '{ctx.myop}'")
+        
+        return res  
+        
     def visitOrExpr(self, ctx) -> Operands.Temporary:
-        raise NotImplementedError()  # TODO
+        tmpl: Operands.Temporary = self.visit(ctx.expr(0))
+        tmpr: Operands.Temporary = self.visit(ctx.expr(1))
+        res = self._current_function.fdata.fresh_tmp()
+        
+        self._current_function.add_instruction(RiscV.lor(res, tmpl, tmpr))
+        return res        
 
     def visitAndExpr(self, ctx) -> Operands.Temporary:
-        raise NotImplementedError()  # TODO
+        tmpl: Operands.Temporary = self.visit(ctx.expr(0))
+        tmpr: Operands.Temporary = self.visit(ctx.expr(1))
+        res = self._current_function.fdata.fresh_tmp()
+        
+        self._current_function.add_instruction(RiscV.land(res, tmpl, tmpr))
+        return res   
 
     def visitEqualityExpr(self, ctx) -> Operands.Temporary:
         return self.visitRelationalExpr(ctx)
@@ -113,16 +141,39 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
     def visitRelationalExpr(self, ctx) -> Operands.Temporary:
         assert ctx.myop is not None
         c = Condition(ctx.myop.type)
+
         if self._debug:
             print("relational expression:")
             print(Trees.toStringTree(ctx, [], self._parser))
             print("Condition:", c)
-        raise NotImplementedError()  # TODO
+        # raise NotImplementedError()  # TODO
 
     def visitMultiplicativeExpr(self, ctx) -> Operands.Temporary:
         assert ctx.myop is not None
+        tmpl: Operands.Temporary = self.visit(ctx.expr(0))
+        tmpr: Operands.Temporary = self.visit(ctx.expr(1))
+        
         div_by_zero_lbl = self._current_function.fdata.get_label_div_by_zero()
-        raise NotImplementedError()  # TODO
+    
+        res = self._current_function.fdata.fresh_tmp()
+    
+        match ctx.myop.type:
+           case MiniCParser.MULT:
+               self._current_function.add_instruction(RiscV.mul(res, tmpl, tmpr))
+               return res
+           case MiniCParser.DIV:
+               self._current_function.add_instruction(RiscV.conditional_jump(div_by_zero_lbl, tmpr, Condition(MiniCParser.EQ), Operands.ZERO))
+               self._current_function.add_instruction(RiscV.div(res, tmpl, tmpr))
+               return res
+               
+           case MiniCParser.MOD:
+               self._current_function.add_instruction(RiscV.conditional_jump(div_by_zero_lbl, tmpr, Condition(MiniCParser.EQ), Operands.ZERO))
+               self._current_function.add_instruction(RiscV.rem(res, tmpl, tmpr))
+               return res
+           
+           case _: raise MiniCInternalError(f"Unknown multiplicative operator '{ctx.myop}'")
+
+    
 
     def visitNotExpr(self, ctx) -> Operands.Temporary:
         raise NotImplementedError()  # TODO
@@ -160,8 +211,16 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
     def visitIfStat(self, ctx) -> None:
         if self._debug:
             print("if statement")
+        
+        tmp_expr: Operands.Temporary = self.visit(ctx.expr())
+        else_label = self._current_function.fdata.fresh_label("else")
         end_if_label = self._current_function.fdata.fresh_label("end_if")
-        raise NotImplementedError()  # TODO
+        
+        self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmp_expr, Condition(MiniCParser.EQ), Operands.ZERO))
+        self.visit(ctx.then_block)
+        self._current_function.add_instruction(RiscV.jump(end_if_label))
+        # raise NotImplementedError()  # TODO
+        self._current_function.add_label(else_label)
         self._current_function.add_label(end_if_label)
 
     def visitWhileStat(self, ctx) -> None:
