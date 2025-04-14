@@ -22,7 +22,7 @@ class Operand():
 
 
 # signed version for riscv
-all_ops = ['blt', 'bgt', 'beq', 'bne', 'ble', 'bge', 'beqz', 'bnez']
+all_ops = ['blt', 'bgt', 'beq', 'bne', 'ble', 'bge']
 opdict = {MiniCParser.LT:   'blt', MiniCParser.GT:   'bgt',
           MiniCParser.LTEQ: 'ble', MiniCParser.GTEQ: 'bge',
           MiniCParser.NEQ:  'bne', MiniCParser.EQ:   'beq'}
@@ -31,13 +31,11 @@ opnot_dict = {'bgt': 'ble',
               'blt': 'bge',
               'ble': 'bgt',
               'beq': 'bne',
-              'bne': 'beq',
-              'beqz': 'bnez',
-              'bnez': 'beqz'}
+              'bne': 'beq'}
 
 
 class Condition(Operand):
-    """Condition, i.e. comparison operand for a CondJump.
+    """Condition, i.e. comparison operand for a ConditionalJump.
 
     Example usage :
 
@@ -59,6 +57,10 @@ class Condition(Operand):
             self._op = opdict[optype]
         elif str(optype) in all_ops:
             self._op = str(optype)
+        elif str(optype) in ('beqz', 'bnez'):
+            raise MiniCInternalError(
+                "beqz/bnez shortcuts not suported. \n"
+                "Please use beq/bne with Operand.ZERO explicitly.")
         else:
             raise MiniCInternalError(f"Unsupported comparison operator {optype}")
 
