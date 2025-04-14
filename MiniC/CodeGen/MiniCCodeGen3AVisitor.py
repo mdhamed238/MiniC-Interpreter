@@ -140,13 +140,52 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
     def visitRelationalExpr(self, ctx) -> Operands.Temporary:
         assert ctx.myop is not None
-        c = Condition(ctx.myop.type)
-
+        
         if self._debug:
             print("relational expression:")
             print(Trees.toStringTree(ctx, [], self._parser))
-            print("Condition:", c)
-        # raise NotImplementedError()  # TODO
+            
+        tmpl: Operands.Temporary = self.visit(ctx.expr(0))
+        tmpr: Operands.Temporary = self.visit(ctx.expr(1))
+        res = self._current_function.fdata.fresh_tmp()
+        else_label = self._current_function.fdata.fresh_label("else_label")
+        end_label = self._current_function.fdata.fresh_label("end")
+        
+        match ctx.myop.type:
+            case MiniCParser.EQ:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.NEQ), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case MiniCParser.NEQ:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.EQ), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case MiniCParser.LT:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.GTEQ), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case MiniCParser.LTEQ:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.GT), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case MiniCParser.GT:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.LTEQ), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case MiniCParser.GTEQ:
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.LT), tmpr))
+                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+                self._current_function.add_instruction(RiscV.jump(end_label))
+            case _:  raise MiniCInternalError(
+                f"Unknown comparison operator '{ctx.myop}'"
+            )
+        
+        self._current_function.add_label(else_label)
+        self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(0)))
+        self._current_function.add_label(end_label)
+        
+        return res
 
     def visitMultiplicativeExpr(self, ctx) -> Operands.Temporary:
         assert ctx.myop is not None
@@ -176,11 +215,28 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
     
 
     def visitNotExpr(self, ctx) -> Operands.Temporary:
-        raise NotImplementedError()  # TODO
+        tmpe: Operands.Temporary = self.visit(ctx.expr())
+        res = self._current_function.fdata.fresh_tmp()
+        alt_label = self._current_function.fdata.fresh_label("alt")
+        end_label = self._current_function.fdata.fresh_label("end")
+        
+        self._current_function.add_instruction(RiscV.conditional_jump(alt_label, tmpe, Condition(MiniCParser.EQ), Operands.ZERO))
+        self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(0)))
+        self._current_function.add_instruction(RiscV.jump(end_label))
+        self._current_function.add_label(alt_label)
+        self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+        self._current_function.add_label(end_label)
+        
+        return res
+        
 
     def visitUnaryMinusExpr(self, ctx) -> Operands.Temporary:
-        raise NotImplementedError("unaryminusexpr")  # TODO
+        tmpe: Operands.Temporary = self.visit(ctx.expr())
+        # res = self._current_function.fdata.fresh_tmp()
+        self._current_function.add_instruction(RiscV.sub(tmpe, Operands.ZERO, tmpe))
 
+        return tmpe
+        
     def visitProgRule(self, ctx) -> None:
         self.visitChildren(ctx)
 
@@ -213,14 +269,16 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
             print("if statement")
         
         tmp_expr: Operands.Temporary = self.visit(ctx.expr())
-        else_label = self._current_function.fdata.fresh_label("else")
+        else_label = self._current_function.fdata.fresh_label("else_block")
         end_if_label = self._current_function.fdata.fresh_label("end_if")
-        
+
         self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmp_expr, Condition(MiniCParser.EQ), Operands.ZERO))
         self.visit(ctx.then_block)
         self._current_function.add_instruction(RiscV.jump(end_if_label))
-        # raise NotImplementedError()  # TODO
+        
         self._current_function.add_label(else_label)
+        if ctx.else_block:
+            self.visit(ctx.else_block)
         self._current_function.add_label(end_if_label)
 
     def visitWhileStat(self, ctx) -> None:
@@ -229,7 +287,16 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
             print(Trees.toStringTree(ctx.expr(), [], self._parser))
             print("and block is:")
             print(Trees.toStringTree(ctx.stat_block(), [], self._parser))
-        raise NotImplementedError()  # TODO
+        
+        while_label = self._current_function.fdata.fresh_label("while")
+        end_label = self._current_function.fdata.fresh_label("end")
+        
+        self._current_function.add_label(while_label)
+        self._current_function.add_instruction(RiscV.conditional_jump(end_label, self.visit(ctx.expr()) , Condition(MiniCParser.EQ), Operands.ZERO))
+        self.visit(ctx.body)
+        self._current_function.add_instruction(RiscV.jump(while_label))
+        self._current_function.add_label(end_label)
+        
     # visit statements
 
     def visitPrintlnintStat(self, ctx) -> None:
