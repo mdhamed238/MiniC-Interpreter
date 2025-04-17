@@ -1,6 +1,6 @@
 from Lib import RiscV
-from Lib.Operands import Temporary, Operand, S
-from Lib.Statement import Instruction
+from Lib.Operands import Temporary, Operand, S, all_ops as branche_ops
+from Lib.Statement import Instruction, Label
 from Lib.Allocator import Allocator
 from typing import List
 
@@ -19,6 +19,27 @@ class AllInMemAllocator(Allocator):
         # TODO: is a temporary (e.g. isinstance(..., Temporary)),
         # TODO: and if so, generate ld/sd accordingly. Replace the
         # TODO: temporary with S[1], S[2] or S[3] physical registers.
+        
+        old_args = old_instr.args()
+        is_branch = old_instr.ins in branche_ops
+        
+        for idx, arg in enumerate(old_args):
+            if isinstance(arg, Temporary):
+                if is_branch:
+                    before.append(RiscV.ld(S[numreg], arg.get_alloced_loc()))
+                    new_args.append(S[numreg])
+                elif idx == 0 and not Instruction.is_read_only(old_instr):
+                    new_args.append(S[numreg])
+                    after.append(RiscV.sd(S[numreg], arg.get_alloced_loc()))
+                elif idx > 0:
+                    new_args.append(S[numreg])
+                    before.append(RiscV.ld(S[numreg], arg.get_alloced_loc()))
+                
+                numreg += 1
+            else:
+                new_args.append(arg)
+            
+                
         new_instr = old_instr.with_args(new_args)
         return before + [new_instr] + after
 

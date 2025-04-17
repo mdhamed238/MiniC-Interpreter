@@ -76,11 +76,15 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
     def visitBooleanAtom(self, ctx) -> Operands.Temporary:
         dest_temp = self._current_function.fdata.fresh_tmp()
-        print(ctx.getText())
+        # alt_label = dest_temp = self._current_function.fdata.fresh_label("alt")
+        
         if ctx.getText() == "true":
             self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(1)))
+            # self._current_function.add_instruction(RiscV.jump(alt_label))
         else:   
             self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(0)))
+            
+        # self._current_function.add_label(alt_label)
         return dest_temp
             
             
@@ -123,7 +127,7 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         tmpl: Operands.Temporary = self.visit(ctx.expr(0))
         tmpr: Operands.Temporary = self.visit(ctx.expr(1))
         res = self._current_function.fdata.fresh_tmp()
-        
+
         self._current_function.add_instruction(RiscV.lor(res, tmpl, tmpr))
         return res        
 
@@ -153,29 +157,28 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         
         match ctx.myop.type:
             case MiniCParser.EQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.NEQ), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case MiniCParser.NEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.EQ), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case MiniCParser.LT:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.GTEQ), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case MiniCParser.LTEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.GT), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case MiniCParser.GT:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.LTEQ), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case MiniCParser.GTEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition(MiniCParser.LT), tmpr))
+                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
                 self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
                 self._current_function.add_instruction(RiscV.jump(end_label))
             case _:  raise MiniCInternalError(
                 f"Unknown comparison operator '{ctx.myop}'"
@@ -232,7 +235,6 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
     def visitUnaryMinusExpr(self, ctx) -> Operands.Temporary:
         tmpe: Operands.Temporary = self.visit(ctx.expr())
-        # res = self._current_function.fdata.fresh_tmp()
         self._current_function.add_instruction(RiscV.sub(tmpe, Operands.ZERO, tmpe))
 
         return tmpe
