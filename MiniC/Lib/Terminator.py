@@ -21,7 +21,7 @@ a terminator for each extracted chunk of instructions.
 from dataclasses import dataclass
 from typing import List, Dict
 from Lib.Errors import MiniCInternalError
-from Lib.Operands import Operand, Renamer, Temporary, Condition
+from Lib.Operands import Operand, Renamer, Temporary, Condition, RegisterLike
 from Lib.Statement import AbsoluteJump, ConditionalJump, Instruction, Label, Statement
 
 
@@ -74,12 +74,12 @@ class BranchingTerminator(Instruction):
     #: The destination label if the condition is false
     label_else: Label
     #: The first operand of the condition
-    op1: Operand
+    op1: RegisterLike
     #: The second operand of the condition
-    op2: Operand
+    op2: RegisterLike
     _read_only = True
 
-    def __init__(self, cond: Condition, op1: Operand, op2: Operand,
+    def __init__(self, cond: Condition, op1: RegisterLike, op2: RegisterLike,
                  label_then: Label, label_else: Label):
         self.cond = cond
         self.label_then = label_then
@@ -111,6 +111,8 @@ class BranchingTerminator(Instruction):
             else self.op1
         op2 = subst.get(self.op2, self.op2) if isinstance(self.op2, Temporary) \
             else self.op2
+        assert isinstance(op1, RegisterLike)
+        assert isinstance(op2, RegisterLike)
         return BranchingTerminator(self.cond, op1, op2, self.label_then, self.label_else)
 
     def with_args(self, new_args: List[Operand]):
@@ -120,6 +122,8 @@ class BranchingTerminator(Instruction):
                 .format(self, new_args))
         op1 = new_args[0]
         op2 = new_args[1]
+        assert isinstance(op1, RegisterLike)
+        assert isinstance(op2, RegisterLike)
         return BranchingTerminator(self.cond, op1, op2, self.label_then, self.label_else)
 
     def __hash__(self):

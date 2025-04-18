@@ -101,7 +101,14 @@ reg_map = dict([(0, 'zero'), (1, 'ra'), (2, 'sp')] +  # no (3, 'gp') nor (4, 'tp
                [(i+28, 't'+str(i+3)) for i in range(4)])
 
 
-class Register(DataLocation):
+class RegisterLike(DataLocation):
+    """An operand usable where a register is expected.
+
+    Can be a physical py:class:`Register` or a py:class:`Temporary`."""
+    pass
+
+
+class Register(RegisterLike):
     """ A (physical) register."""
 
     _number: int
@@ -184,7 +191,7 @@ class Immediate(DataLocation):
         return str(self._val)
 
 
-class Temporary(DataLocation):
+class Temporary(RegisterLike):
     """Temporary, a location that has not been allocated yet.
     It will later be mapped to a physical register (Register) or to a memory location (Offset).
     """
