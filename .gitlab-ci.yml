@@ -4,6 +4,7 @@ pages:
     ANTLR4: 'java -jar /opt/antlr-4.13.1-complete.jar'
   rules:
     - changes:
+      - .gitlab-*
       - MiniC/*
       - MiniC/**/*
   script:
