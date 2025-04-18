@@ -120,7 +120,7 @@ Si vous n'arrivez pas à installer les outils sur vos machines, vous pourrez tra
     <!-- Théo -->
     - :100: Contrôle court (ANTLR et RiscV), voir instructions : [QCM.md](QCM.md).
     - Sujet : [TD3 génération de code](https://matthieu-moy.fr/cours/mif08/mif08-td3.pdf)
-    <!-- - [Éléments de corrigé, partiel](https://matthieu-moy.fr/cours/mif08/mif08-td3-corrige-partiel.pdf) -->
+    [Éléments de corrigé, partiel](https://matthieu-moy.fr/cours/mif08/mif08-td3-solutions.pdf)
 
 - :hammer: 11h30-13h : TP 4, génération de code
     <!-- - Transparents de présentation : [capmif_labs.pdf](https://compil-lyon.gitlabpages.inria.fr/mif08-20/capmif_labs.pdf) -->
