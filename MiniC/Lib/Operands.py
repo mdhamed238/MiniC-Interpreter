@@ -104,7 +104,7 @@ reg_map = dict([(0, 'zero'), (1, 'ra'), (2, 'sp')] +  # no (3, 'gp') nor (4, 'tp
 class RegisterLike(DataLocation):
     """An operand usable where a register is expected.
 
-    Can be a physical py:class:`Register` or a py:class:`Temporary`."""
+    Can be a physical :py:class:`Register` or a :py:class:`Temporary`."""
     pass
 
 
