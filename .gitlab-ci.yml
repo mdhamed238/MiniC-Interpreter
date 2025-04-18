@@ -7,7 +7,7 @@ pages:
       - MiniC/*
       - MiniC/**/*
   script:
-    - .gitlab-pages.sh
+    - ./.gitlab-pages.sh
   artifacts:
     paths:
     - public/
