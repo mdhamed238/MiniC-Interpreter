@@ -35,7 +35,7 @@ opnot_dict = {'bgt': 'ble',
 
 
 class Condition(Operand):
-    """Condition, i.e. comparison operand for a ConditionalJump.
+    """Condition, i.e. comparison operand for a :py:class:`Lib.Statement.ConditionalJump`.
 
     Example usage :
 
