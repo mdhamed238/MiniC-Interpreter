@@ -10,4 +10,3 @@ int main()
 }
 
 // EXPECTED
-// 0661976465
