@@ -7,8 +7,8 @@ int main()
     b = 5;
     c = 10;
 
-    println_int(a == b); 
-    println_int(a == c); 
+    println_bool(a == b); 
+    println_bool(a == c); 
 
     return 0;
 }

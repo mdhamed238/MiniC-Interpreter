@@ -6,7 +6,7 @@ int main()
     a = true;
     b = false;
 
-    println_int(a != b); 
+    println_bool(a != b); 
 
     return 0;
 }

@@ -10,6 +10,6 @@ int main()
 }
 
 // SKIP TEST EXPECTED
-// EXPECTED
 // EXECCODE 1
+// EXPECTED
 // Division by 0
