@@ -76,15 +76,12 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
     def visitBooleanAtom(self, ctx) -> Operands.Temporary:
         dest_temp = self._current_function.fdata.fresh_tmp()
-        # alt_label = dest_temp = self._current_function.fdata.fresh_label("alt")
         
         if ctx.getText() == "true":
             self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(1)))
-            # self._current_function.add_instruction(RiscV.jump(alt_label))
         else:   
             self._current_function.add_instruction(RiscV.li(dest_temp, Operands.Immediate(0)))
             
-        # self._current_function.add_label(alt_label)
         return dest_temp
             
             
@@ -154,35 +151,11 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         res = self._current_function.fdata.fresh_tmp()
         else_label = self._current_function.fdata.fresh_label("else_label")
         end_label = self._current_function.fdata.fresh_label("end")
+        condition = Condition(ctx.myop.type)
         
-        match ctx.myop.type:
-            case MiniCParser.EQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case MiniCParser.NEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case MiniCParser.LT:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case MiniCParser.LTEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case MiniCParser.GT:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case MiniCParser.GTEQ:
-                self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, Condition.negate(Condition(ctx.myop.type)), tmpr))
-                self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
-                self._current_function.add_instruction(RiscV.jump(end_label))
-            case _:  raise MiniCInternalError(
-                f"Unknown comparison operator '{ctx.myop}'"
-            )
+        self._current_function.add_instruction(RiscV.conditional_jump(else_label, tmpl, condition.negate(), tmpr))
+        self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(1)))
+        self._current_function.add_instruction(RiscV.jump(end_label))
         
         self._current_function.add_label(else_label)
         self._current_function.add_instruction(RiscV.li(res, Operands.Immediate(0)))
@@ -232,12 +205,11 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
         
         return res
         
-
     def visitUnaryMinusExpr(self, ctx) -> Operands.Temporary:
         tmpe: Operands.Temporary = self.visit(ctx.expr())
-        self._current_function.add_instruction(RiscV.sub(tmpe, Operands.ZERO, tmpe))
-
-        return tmpe
+        dest = self._current_function.fdata.fresh_tmp()
+        self._current_function.add_instruction(RiscV.sub(dest, Operands.ZERO, tmpe))
+        return dest
         
     def visitProgRule(self, ctx) -> None:
         self.visitChildren(ctx)
