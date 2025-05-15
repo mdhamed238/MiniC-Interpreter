@@ -213,6 +213,20 @@ class MiniCTypingVisitor(MiniCVisitor):
         if condtype != BaseType.Boolean:
             self._raise(ctx, 'while condition', condtype)
         self.visit(ctx.body)
+        
+    def visitForStat(self, ctx):
+        if ctx.init_assign is not None:
+            self.visit(ctx.init_assign)
+            
+        if ctx.expr() is not None:
+            condtype = self.visit(ctx.expr())
+            if condtype != BaseType.Boolean:
+                self._raise(ctx, 'for condition', condtype)
+       
+        if ctx.iter_assign is not None:     
+            self.visit(ctx.iter_assign)
+            
+        self.visit(ctx.do_block)
 
     def visitIfStat(self, ctx):
         condtype = self.visit(ctx.expr())

@@ -202,6 +202,15 @@ class MiniCInterpretVisitor(MiniCVisitor):
     def visitWhileStat(self, ctx) -> None:
         while(self.visit(ctx.expr())):
             self.visit(ctx.body)
+            
+    def visitForStat(self, ctx) -> None:
+       if ctx.init_assign is not None:
+           self.visit(ctx.init_assign)
+       
+       while ctx.expr() is None or self.visit(ctx.expr()):
+           self.visit(ctx.do_block)
+           if ctx.iter_assign is not None:
+               self.visit(ctx.iter_assign)
 
     # TOPLEVEL
     def visitProgRule(self, ctx) -> None:
