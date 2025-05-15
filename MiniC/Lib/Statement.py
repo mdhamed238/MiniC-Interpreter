@@ -9,7 +9,7 @@ is inherited by :py:class:`Instru3A`
 
 from dataclasses import dataclass
 from typing import (List, Dict, TypeVar)
-from Lib.Operands import (Operand, Renamer, Temporary, Condition)
+from Lib.Operands import (Operand, Renamer, Temporary, RegisterLike, Condition)
 from Lib.Errors import MiniCInternalError
 
 
@@ -233,11 +233,11 @@ class ConditionalJump(Instruction):
     """ A Conditional Jump is a specific kind of instruction"""
     cond: Condition
     label: Label
-    op1: Operand
-    op2: Operand
+    op1: RegisterLike
+    op2: RegisterLike
     _read_only = True
 
-    def __init__(self, cond: Condition, op1: Operand, op2: Operand, label: Label):
+    def __init__(self, cond: Condition, op1: RegisterLike, op2: RegisterLike, label: Label):
         self.cond = cond
         self.label = label
         self.op1 = op1
@@ -263,6 +263,8 @@ class ConditionalJump(Instruction):
             else self.op1
         op2 = subst.get(self.op2, self.op2) if isinstance(self.op2, Temporary) \
             else self.op2
+        assert isinstance(op1, RegisterLike)
+        assert isinstance(op2, RegisterLike)
         return ConditionalJump(self.cond, op1, op2, self.label)
 
     def with_args(self, new_args: List[Operand]):
@@ -272,6 +274,8 @@ class ConditionalJump(Instruction):
                 .format(self, new_args))
         assert isinstance(new_args[2], Label)
         label: Label = new_args[2]
+        assert isinstance(new_args[0], RegisterLike)
+        assert isinstance(new_args[1], RegisterLike)
         return ConditionalJump(self.cond, new_args[0], new_args[1], label)
 
     def __hash__(self):

@@ -3,6 +3,19 @@
 
 Les nouvelles du cours apparaîtront ici au fur et à mesure.
 
+## 18/04/2025 : éléments de corrigé du TD3, typage plus strict pour les TP
+
+J'ai mis en ligne une partie du corrigé du TD3 :
+
+  https://matthieu-moy.fr/cours/mif08/mif08-td3-solutions.pdf
+
+J'ai fait quelques améliorations sur le typage des fonctions de l'API RiscV que
+vous utilisez, pour rejeter statiquement (via pyright) des programmes qui
+auraient généré du code assembleur incorrect (typiquement utilisation d'un
+immédiat en opérande d'un branchement conditionnel). Vous pouvez faire un 'git
+pull' pour avoir ces améliorations, en espérant que cela vous aide à éviter des
+bugs. 
+
 ## 20/03/2025 : à propos de couverture, QCM, deadlines
 
 Vos TP notés seront évalués essentiellement sur deux critères :
