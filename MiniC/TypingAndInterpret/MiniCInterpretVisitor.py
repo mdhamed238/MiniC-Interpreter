@@ -211,10 +211,15 @@ class MiniCInterpretVisitor(MiniCVisitor):
 
             self.has_continue_stat = False
             block = ctx.do_block.block()
-            for stat in block.stat():
+            
+            if block is not None:
+                for stat in block.stat():
+                    self.visit(stat)
+                    if self.has_continue_stat:
+                        break
+            else:
+                stat = ctx.do_block.stat()
                 self.visit(stat)
-                if self.has_continue_stat:
-                    break
 
             if ctx.iter_assign is not None:
                 self.visit(ctx.iter_assign)
