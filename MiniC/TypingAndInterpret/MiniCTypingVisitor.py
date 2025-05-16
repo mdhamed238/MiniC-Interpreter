@@ -17,6 +17,7 @@ class MiniCTypingVisitor(MiniCVisitor):
     def __init__(self):
         self._memorytypes = dict()  # id -> types
         self._current_function = "main"
+        self.for_counter = 0
 
     def _raise(self, ctx, for_what, *types):
         raise MiniCTypeError(
@@ -215,6 +216,7 @@ class MiniCTypingVisitor(MiniCVisitor):
         self.visit(ctx.body)
         
     def visitForStat(self, ctx):
+        self.for_counter += 1
         if ctx.init_assign is not None:
             self.visit(ctx.init_assign)
             
@@ -222,11 +224,18 @@ class MiniCTypingVisitor(MiniCVisitor):
             condtype = self.visit(ctx.expr())
             if condtype != BaseType.Boolean:
                 self._raise(ctx, 'for condition', condtype)
-       
+           
         if ctx.iter_assign is not None:     
             self.visit(ctx.iter_assign)
-            
+                
         self.visit(ctx.do_block)
+        self.for_counter -= 1
+        
+        
+    def visitContinueStat(self, ctx):
+        if self.for_counter == 0:
+            raise MiniCTypeError("'continue' statement not in loop statement")
+        
 
     def visitIfStat(self, ctx):
         condtype = self.visit(ctx.expr())

@@ -1,10 +1,11 @@
 # Visitor to *interpret* MiniC files
 from typing import (
-  Dict,
-  List)
+    Dict,
+    List)
 from MiniCVisitor import MiniCVisitor
 from MiniCParser import MiniCParser
 from Lib.Errors import MiniCRuntimeError, MiniCInternalError, MiniCTypeError, MiniCUnsupportedError
+from collections import deque
 
 MINIC_VALUE = int | str | bool | float | List['MINIC_VALUE']
 
@@ -16,6 +17,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
     def __init__(self):
         self._memory = dict()  # store all variable ids and values.
         self.has_main = False
+        self.has_continue_stat = False
 
     # visitors for variable declarations
 
@@ -23,7 +25,7 @@ class MiniCInterpretVisitor(MiniCVisitor):
         # Initialise all variables in self._memory
         type_str = ctx.typee().getText()
         var_list = self.visit(ctx.id_l())
-        
+
         for var_name in var_list:
             match type_str:
                 case 'int':
@@ -35,12 +37,10 @@ class MiniCInterpretVisitor(MiniCVisitor):
                 case 'string':
                     self._memory[var_name] = ""
 
-        
     def visitIdList(self, ctx) -> List[str]:
         t = self.visit(ctx.id_l())
         t.append(ctx.ID().getText())
         return t
-        
 
     def visitIdListBase(self, ctx) -> List[str]:
         return [ctx.ID().getText()]
@@ -122,29 +122,28 @@ class MiniCInterpretVisitor(MiniCVisitor):
             raise MiniCInternalError(
                 f"Unknown additive operator '{ctx.myop}'")
 
-
-    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE: 
+    def visitMultiplicativeExpr(self, ctx) -> MINIC_VALUE:
         assert ctx.myop is not None
         lval = self.visit(ctx.expr(0))
         rval = self.visit(ctx.expr(1))
-        
+
         match ctx.myop.type:
             case MiniCParser.MULT:
                 return lval * rval
             case MiniCParser.DIV:
                 if rval == 0:
                     raise MiniCRuntimeError("Division by 0")
-                
+
                 if isinstance(lval, int) and isinstance(rval, int):
                     return int(lval / rval)
-                
+
                 return lval / rval
             case MiniCParser.MOD:
                 if rval == 0:
                     raise MiniCRuntimeError("Division by 0")
                 q = int(lval / rval)
                 return lval - q * rval
-            
+
             case _: raise MiniCInternalError(f"Unknown multiplicative operator '{ctx.myop}'")
 
     def visitNotExpr(self, ctx) -> bool:
@@ -180,17 +179,16 @@ class MiniCInterpretVisitor(MiniCVisitor):
         name = ctx.ID().getText()
         new_value = self.visit(ctx.expr())
         old_value = self._memory[name]
-        
+
         if isinstance(old_value, bool):
             self._memory[name] = bool(new_value)
         elif isinstance(old_value, float):
             self._memory[name] = float(new_value)
         elif isinstance(old_value, int):
             self._memory[name] = int(new_value)
-        else: 
+        else:
             self._memory[name] = new_value
         # print(f"{name} <-- {self._memory[name]} was {old_value}")
-
 
     def visitIfStat(self, ctx) -> None:
         if self.visit(ctx.expr()):
@@ -200,19 +198,32 @@ class MiniCInterpretVisitor(MiniCVisitor):
                 self.visit(ctx.else_block)
 
     def visitWhileStat(self, ctx) -> None:
-        while(self.visit(ctx.expr())):
+        while (self.visit(ctx.expr())):
             self.visit(ctx.body)
-            
+
     def visitForStat(self, ctx) -> None:
-       if ctx.init_assign is not None:
-           self.visit(ctx.init_assign)
-       
-       while ctx.expr() is None or self.visit(ctx.expr()):
-           self.visit(ctx.do_block)
-           if ctx.iter_assign is not None:
-               self.visit(ctx.iter_assign)
+        if ctx.init_assign is not None:
+            self.visit(ctx.init_assign)
+
+        while True:
+            if ctx.expr() is not None and not self.visit(ctx.expr()):
+                break
+
+            self.has_continue_stat = False
+            block = ctx.do_block.block()
+            for stat in block.stat():
+                self.visit(stat)
+                if self.has_continue_stat:
+                    break
+
+            if ctx.iter_assign is not None:
+                self.visit(ctx.iter_assign)
+
+    def visitContinueStat(self, ctx):
+        self.has_continue_stat = True
 
     # TOPLEVEL
+
     def visitProgRule(self, ctx) -> None:
         self.visitChildren(ctx)
         if not self.has_main:
