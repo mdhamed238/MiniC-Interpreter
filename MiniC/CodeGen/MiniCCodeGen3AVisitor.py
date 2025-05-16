@@ -269,33 +269,44 @@ class MiniCCodeGen3AVisitor(MiniCVisitor):
 
         self._current_function.add_label(while_label)
         self._current_function.add_instruction(RiscV.conditional_jump(
-            end_label, self.visit(ctx.expr()),
-            Condition(MiniCParser.EQ),
-            Operands.ZERO))
+            end_label, self.visit(ctx.expr()), Condition(MiniCParser.EQ), Operands.ZERO))
         self.visit(ctx.body)
         self._current_function.add_instruction(RiscV.jump(while_label))
         self._current_function.add_label(end_label)
 
     def visitForStat(self, ctx) -> None:
+        prev_continue_label = getattr(self, '_continue_label', None)
+
         if ctx.init_assign is not None:
             self.visit(ctx.init_assign)
 
         for_label = self._current_function.fdata.fresh_label("for")
-        end_label = self._current_function.fdata.fresh_label("end_for")
+        continue_label = self._current_function.fdata.fresh_label("continue")
+        end_label = self._current_function.fdata.fresh_label("end")
+
+        self._continue_label = continue_label
 
         self._current_function.add_label(for_label)
         if ctx.expr() is not None:
-            self._current_function.add_instruction(
-                RiscV.conditional_jump(end_label, self.visit(ctx.expr()),
-                                       Condition(MiniCParser.EQ), Operands.ZERO))
-        
-        # Body    
+            self._current_function.add_instruction(RiscV.conditional_jump(
+                end_label, self.visit(ctx.expr()), Condition(MiniCParser.EQ), Operands.ZERO))
+
         self.visit(ctx.do_block)
+
+        self._current_function.add_label(continue_label)
         if ctx.iter_assign is not None:
             self.visit(ctx.iter_assign)
-            
+
         self._current_function.add_instruction(RiscV.jump(for_label))
         self._current_function.add_label(end_label)
+
+        self._continue_label = prev_continue_label
+
+    def visitContinueStat(self, ctx):
+        if not hasattr(self, '_continue_label') or self._continue_label is None:
+            raise MiniCInternalError("Continue statement outside loop")
+
+        self._current_function.add_instruction(RiscV.jump(self._continue_label))
 
     # visit statements
 

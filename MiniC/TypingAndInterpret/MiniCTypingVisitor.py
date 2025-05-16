@@ -234,7 +234,7 @@ class MiniCTypingVisitor(MiniCVisitor):
         
     def visitContinueStat(self, ctx):
         if self.for_counter == 0:
-            raise MiniCTypeError("'continue' statement not in loop statement")
+            raise MiniCTypeError("'continue' statement not in for loop statement")
         
 
     def visitIfStat(self, ctx):
